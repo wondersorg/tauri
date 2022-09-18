@@ -385,6 +385,12 @@ impl<'a, R: Runtime> WindowBuilder<'a, R> {
     self
   }
 
+  /// Whether the window should always be below other windows.
+  pub fn always_on_bottom(mut self, always_on_bottom: bool) -> Self {
+    self.window_builder = self.window_builder.always_on_bottom(always_on_bottom);
+    self
+  }
+
   /// Sets the window icon.
   pub fn icon(mut self, icon: Icon) -> crate::Result<Self> {
     self.window_builder = self.window_builder.icon(icon.try_into()?)?;

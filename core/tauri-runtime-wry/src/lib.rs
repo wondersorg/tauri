@@ -861,6 +861,11 @@ impl WindowBuilder for WindowBuilderWrapper {
     self
   }
 
+  fn always_on_bottom(mut self, always_on_bottom: bool) -> Self {
+    self.inner = self.inner.with_always_on_bottom(always_on_bottom);
+    self
+  }
+
   #[cfg(windows)]
   fn parent_window(mut self, parent: HWND) -> Self {
     self.inner = self.inner.with_parent_window(parent);
@@ -1039,6 +1044,7 @@ pub enum WindowMessage {
   Close,
   SetDecorations(bool),
   SetAlwaysOnTop(bool),
+  SetAlwaysOnBottom(bool),
   SetSize(Size),
   SetMinSize(Option<Size>),
   SetMaxSize(Option<Size>),
@@ -1400,6 +1406,13 @@ impl<T: UserEvent> Dispatch<T> for WryDispatcher<T> {
     send_user_message(
       &self.context,
       Message::Window(self.window_id, WindowMessage::SetAlwaysOnTop(always_on_top)),
+    )
+  }
+
+  fn set_always_on_bottom(&self, always_on_bottom: bool) -> Result<()> {
+    send_user_message(
+      &self.context,
+      Message::Window(self.window_id, WindowMessage::SetAlwaysOnBottom(always_on_bottom)),
     )
   }
 
@@ -2300,6 +2313,7 @@ fn handle_user_message<T: UserEvent>(
             }
             WindowMessage::SetDecorations(decorations) => window.set_decorations(decorations),
             WindowMessage::SetAlwaysOnTop(always_on_top) => window.set_always_on_top(always_on_top),
+            WindowMessage::SetAlwaysOnBottom(always_on_bottom) => window.set_always_on_bottom(always_on_bottom),
             WindowMessage::SetSize(size) => {
               window.set_inner_size(SizeWrapper::from(size).0);
             }
