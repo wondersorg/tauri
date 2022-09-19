@@ -101,6 +101,9 @@ pub enum WindowManagerCmd {
   #[cfg(window_set_always_on_top)]
   #[serde(rename_all = "camelCase")]
   SetAlwaysOnTop(bool),
+  #[cfg(window_set_always_on_bottom)]
+  #[serde(rename_all = "camelCase")]
+  SetAlwaysOnBottom(bool),
   #[cfg(window_set_size)]
   SetSize(Size),
   #[cfg(window_set_min_size)]
@@ -290,6 +293,8 @@ impl Cmd {
       WindowManagerCmd::SetDecorations(decorations) => window.set_decorations(decorations)?,
       #[cfg(window_set_always_on_top)]
       WindowManagerCmd::SetAlwaysOnTop(always_on_top) => window.set_always_on_top(always_on_top)?,
+      #[cfg(window_set_always_on_bottom)]
+      WindowManagerCmd::SetAlwaysOnBottom(always_on_bottom) => window.set_always_on_bottom(always_on_bottom)?,
       #[cfg(window_set_size)]
       WindowManagerCmd::SetSize(size) => window.set_size(size)?,
       #[cfg(window_set_min_size)]

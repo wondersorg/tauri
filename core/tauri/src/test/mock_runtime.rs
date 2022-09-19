@@ -457,7 +457,7 @@ impl<T: UserEvent> Dispatch<T> for MockDispatcher {
   }
 
   fn set_always_on_bottom(&self, always_on_bottom: bool) -> Result<()> {
-      Ok(())
+    Ok(())
   }
 
   fn set_size(&self, size: Size) -> Result<()> {

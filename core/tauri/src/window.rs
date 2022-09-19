@@ -386,6 +386,7 @@ impl<'a, R: Runtime> WindowBuilder<'a, R> {
   }
 
   /// Whether the window should always be below other windows.
+  #[must_use]
   pub fn always_on_bottom(mut self, always_on_bottom: bool) -> Self {
     self.window_builder = self.window_builder.always_on_bottom(always_on_bottom);
     self
@@ -1059,6 +1060,15 @@ impl<R: Runtime> Window<R> {
       .window
       .dispatcher
       .set_always_on_top(always_on_top)
+      .map_err(Into::into)
+  }
+
+  /// Determines if this window should always be below other windows.
+  pub fn set_always_on_bottom(&self, always_on_bottom: bool) -> crate::Result<()> {
+    self
+      .window
+      .dispatcher
+      .set_always_on_bottom(always_on_bottom)
       .map_err(Into::into)
   }
 

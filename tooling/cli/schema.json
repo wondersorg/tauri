@@ -1872,6 +1872,11 @@
           "default": false,
           "type": "boolean"
         },
+        "setAlwaysOnBottom": {
+          "description": "Allows setting the always_on_bottom flag of the window.",
+          "default": false,
+          "type": "boolean"
+        },
         "setSize": {
           "description": "Allows setting the window size.",
           "default": false,

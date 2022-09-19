@@ -736,6 +736,7 @@ impl WindowBuilder for WindowBuilderWrapper {
       .decorations(config.decorations)
       .maximized(config.maximized)
       .always_on_top(config.always_on_top)
+      .always_on_bottom(config.always_on_bottom)
       .skip_taskbar(config.skip_taskbar)
       .theme(config.theme);
 
